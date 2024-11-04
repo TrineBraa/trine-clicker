@@ -1,41 +1,40 @@
-import { BrowserRouter as Router, Route, Routes  } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Navigate  } from 'react-router-dom';
 import { useState } from 'react'
-import StartPage from "./pages/startPage"
-import MainPage from './pages/mainPage';
-import EndPage from './pages/endPage';
+import StartPage from './pages/TempStartPage'
+import MainPage from './pages/TempMainPage';
+import EndPage from './pages/TempEndPage';
 import './App.css'
 
 
 
 function App() {
    const [gold, setGold] = useState(1);
-  
+   const [goldPerClick, setGoldPerClick] = useState(1);
 
   function resetGame() {
     setGold(1);
    }
 
-   function endGame() {
-
-   }
-
+ 
   return (
     <>
     <Router>
       <Routes>
-        <Route path={'/'} element ={<StartPage/>}/>
+        <Route path={'/'} element ={<StartPage resetGame={resetGame}/>}/>
         <Route 
           path={'/main'} 
           element={
             <MainPage
                gold ={gold}
                setGold = {setGold}
-              endGame={endGame}
+               goldPerClick = {goldPerClick}
+               setGoldPerClick = {setGoldPerClick}
+               endGame={() => <Navigate to="/credit" replace/>}
             />}
           />
         <Route
-        path="/credit"
-        element = {<EndPage resetGame={resetGame}/>}
+          path="/credit"
+          element = {<EndPage resetGame={resetGame}/>}
         />
       </Routes>
     </Router>
