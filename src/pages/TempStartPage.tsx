@@ -16,7 +16,7 @@ const navigate = useNavigate();
     <div  className="bg-neutral-800 text-white w-screen h-screen flex-col items-center mx-auto justify-center text-center py-20">
       <h1 className="py-20 font-mono text-6xl font-semibold text-emerald-600">Trine Clicker Game</h1>
       <button
-      className="rounded-sm outline outline-emerald-600 py-2 px-6 hover:bg-neutral-600"
+      className="rounded-sm outline outline-emerald-600 py-5 px-20 hover:bg-neutral-600"
       onClick={StartGame}
         >
           Start

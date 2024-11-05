@@ -10,9 +10,13 @@ import './App.css'
 function App() {
    const [gold, setGold] = useState(1);
    const [goldPerClick, setGoldPerClick] = useState(1);
+   const [ClickCount, setClickCount] = useState(0);
+
 
   function resetGame() {
     setGold(1);
+    setClickCount(0);
+    setGoldPerClick(1);
    }
 
  
@@ -29,12 +33,19 @@ function App() {
                setGold = {setGold}
                goldPerClick = {goldPerClick}
                setGoldPerClick = {setGoldPerClick}
+               resetGame = {resetGame}
+               ClickCount= {ClickCount}
+               setClickCount= {setClickCount}
                endGame={() => <Navigate to="/credit" replace/>}
             />}
           />
         <Route
           path="/credit"
-          element = {<EndPage resetGame={resetGame}/>}
+          element = {
+          <EndPage 
+            ClickCount = {ClickCount}
+            goldPerClick= {goldPerClick}
+          />}
         />
       </Routes>
     </Router>

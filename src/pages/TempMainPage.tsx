@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import EndGame from '../components/EndGame.js';
 import Upgrade from '../components/Upgrade.js'
-import EndPage from './TempEndPage.js';
+
 
 
 interface MainPageProps {
@@ -9,20 +9,26 @@ interface MainPageProps {
     setGold: React.Dispatch<React.SetStateAction<number>>;
     goldPerClick: number;
     setGoldPerClick: React.Dispatch<React.SetStateAction<number>>;
-
+    ClickCount: number;
+    setClickCount: React.Dispatch<React.SetStateAction<number>>;
+    resetGame: () => void;
     endGame: () => void;
 }
 
 
-function MainPage({gold, setGold, goldPerClick, setGoldPerClick} : MainPageProps) {
+function MainPage({gold, setGold, goldPerClick, setGoldPerClick, ClickCount, setClickCount} : MainPageProps) {
 const navigate = useNavigate();
 
  function increaseGold(){
+  if (gold >= 1000000) {
+    navigate("/credit")
+  } else{
   setGold(gold + goldPerClick)
+  setClickCount(ClickCount + 1)
+  }
  }
 
  function handleEndGame(){
-  EndGame()
   navigate("/credit")
  }
 
@@ -182,7 +188,7 @@ const navigate = useNavigate();
             setGoldPerClick = {setGoldPerClick}
           />
       </div>
-      <div className="grid grid-cols-5 justify-center pt-4 mx-20">
+      <div className="grid justify-center pt-4 mx-20">
         <EndGame
           text={"End the game"}
           EndPage={handleEndGame}
